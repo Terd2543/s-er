@@ -12,9 +12,10 @@ function App() {
     // *** สำคัญมาก: เปลี่ยนตรงนี้เป็น URL ของ Backend ของคุณบน Render.com ***
     // ตัวอย่าง: const BACKEND_URL = 'https://your-backend-service-name.onrender.com/api/chat';
     // หากรันบน Local ให้ใช้: http://localhost:3001/api/chat
-    const BACKEND_URL = process.env.NODE_ENV === 'production'
-        ? 'https://s-er.onrender.com' // <-- *** เปลี่ยน URL นี้ให้เป็น URL จริงของ Backend บน Render ของคุณ ***
-        : 'http://localhost:3001/api/chat';
+    const BACKEND_BASE_URL = 'https://ai-8mi3.onrender.com'; // <-- ตรวจสอบว่าตรงกัน
+const BACKEND_URL = process.env.NODE_ENV === 'production'
+    ? `${BACKEND_BASE_URL}/chat` // <--- ตรงนี้ต้องเป็น /chat
+    : `http://localhost:3001/chat`;
 
     const handleSendMessage = async () => {
         setLoading(true); // เริ่ม loading state
