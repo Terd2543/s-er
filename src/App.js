@@ -1,3 +1,5 @@
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css'; // ตรวจสอบว่ามีไฟล์ App.css อยู่ในโฟลเดอร์ src
