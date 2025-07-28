@@ -1,44 +1,47 @@
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import React, { useState } from 'react';
+="chat-messages">
+                        {chatHistory.length === 0 && !loading && !error && (
+ import React, { useState } from 'react'; // ไม่ใช้ useEffect แล้วจึงเอาออก
 import axios from 'axios';
-import './App.css'; // ตรวจสอบว่ามีไฟล์ App.css อยู่ในโฟลเดอร์ src
+import './App.css';
+import ReactMarkdown from 'react-markdown'; // <--- เพิ่ม: นำเข้า ReactMarkdown
+import remarkGfm from 'remark-gfm';       // <--- เพิ่ม: นำเข้า remarkGfm
 
 function App() {
     const [message, setMessage] = useState('');
-    const [chatHistory, setChatHistory] = useState([]); // เก็บประวัติการสนทนา
+    const [chatHistory, setChatHistory] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [aiName] = useState('swchat.kru');
 
-    // ตรวจสอบให้แน่ใจว่า URL นี้ถูกต้องสำหรับ Backend ของคุณบน Render
-    // เช่น 'https://ai-8mi3.onrender.com/chat' หรือชื่อที่คุณตั้งไว้
-    const BACKEND_BASE_URL = 'https://ai-8mi3.onrender.com'; // <--- เปลี่ยน URL นี้ให้เป็น Backend จริงของคุณ!
+    // *** สำคัญมาก: เปลี่ยน URL นี้ให้เป็น Backend ของคุณบน Render ***
+    // ตัวอย่าง: 'https://ai-8mi3.onrender.com'
+    const BACKEND_BASE_URL = 'https://ai-8mi3.onrender.com';
 
     const BACKEND_URL = process.env.NODE_ENV === 'production'
         ? `${BACKEND_BASE_URL}/chat`
         : `http://localhost:3001/chat`;
 
     const handleSendMessage = async () => {
-        if (!message.trim()) return; // ไม่ส่งข้อความว่างเปล่า
+        if (!message.trim()) return;
 
         const userMessage = { sender: 'user', text: message };
-        setChatHistory(prev => [...prev, userMessage]); // เพิ่มข้อความผู้ใช้เข้าประวัติ
+        setChatHistory(prev => [...prev, userMessage]);
 
-        setLoading(true); // เริ่ม loading state
-        setError(''); // ล้าง error เก่า
-        setMessage(''); // ล้าง input box
+        setLoading(true);
+        setError('');
+        setMessage('');
 
         try {
             const response = await axios.post(BACKEND_URL, { message: userMessage.text });
             const aiReply = response.data.reply;
             const aiMessage = { sender: aiName, text: aiReply };
-            setChatHistory(prev => [...prev, aiMessage]); // เพิ่มข้อความ AI เข้าประวัติ
+            setChatHistory(prev => [...prev, aiMessage]);
 
         } catch (err) {
             console.error('Error sending message:', err);
             let errorMessage = 'Failed to get response from AI. Please check server or API key.';
             if (err.response) {
+                // พยายามดึง error message จาก response.data
                 errorMessage = `Error from server: ${err.response.status} - ${JSON.stringify(err.response.data.error || err.response.data)}`;
             } else if (err.request) {
                 errorMessage = `No response from server. Backend might be down or URL is incorrect. (${err.message})`;
@@ -46,16 +49,15 @@ function App() {
                 errorMessage = `An unexpected error occurred: ${err.message}`;
             }
             setError(errorMessage);
-            // ถ้ามี error, อาจจะเพิ่มข้อความ error เข้าไปใน chat history ด้วย (optionally)
             setChatHistory(prev => [...prev, { sender: 'system', text: `Error: ${errorMessage}` }]);
         } finally {
-            setLoading(false); // หยุด loading state
+            setLoading(false);
         }
     };
 
     const handleKeyPress = (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) { // กด Enter โดยไม่กด Shift
-            e.preventDefault(); // ป้องกันการขึ้นบรรทัดใหม่
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
             handleSendMessage();
         }
     };
@@ -76,7 +78,10 @@ function App() {
                         {chatHistory.map((msg, index) => (
                             <div key={index} className={`message-bubble ${msg.sender === 'user' ? 'user' : 'ai'}`}>
                                 <span className="sender-name">{msg.sender === 'user' ? 'คุณ' : aiName}: </span>
-                                {msg.text}
+                                {/* *** เปลี่ยน: ใช้ ReactMarkdown เพื่อแสดงข้อความ *** */}
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                    {msg.text}
+                                </ReactMarkdown>
                             </div>
                         ))}
                         {loading && (
@@ -96,7 +101,7 @@ function App() {
                             onChange={(e) => setMessage(e.target.value)}
                             onKeyPress={handleKeyPress}
                             placeholder="พิมพ์ข้อความ..."
-                            rows="1" // เริ่มต้นที่ 1 บรรทัด และขยายได้
+                            rows="1"
                             className="message-input"
                             disabled={loading}
                         />
