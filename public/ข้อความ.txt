@@ -1,0 +1,50 @@
+2025-07-28T05:06:59.433178303Z ==> Using Node.js version 22.16.0 (default)
+2025-07-28T05:06:59.479766194Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2025-07-28T05:07:02.075047014Z ==> Using Bun version 1.1.0 (default)
+2025-07-28T05:07:02.075072335Z ==> Docs on specifying a Bun version: https://render.com/docs/bun-version
+2025-07-28T05:08:25.987254921Z 
+2025-07-28T05:08:25.987291462Z added 1326 packages, and audited 1327 packages in 1m
+2025-07-28T05:08:25.987305502Z 
+2025-07-28T05:08:25.987327213Z 269 packages are looking for funding
+2025-07-28T05:08:25.987333793Z   run `npm fund` for details
+2025-07-28T05:08:25.998224279Z 
+2025-07-28T05:08:25.998256569Z 9 vulnerabilities (3 moderate, 6 high)
+2025-07-28T05:08:25.9982622Z 
+2025-07-28T05:08:25.99826792Z To address all issues (including breaking changes), run:
+2025-07-28T05:08:25.99827396Z   npm audit fix --force
+2025-07-28T05:08:25.99827863Z 
+2025-07-28T05:08:25.99828389Z Run `npm audit` for details.
+2025-07-28T05:08:30.847893803Z 
+2025-07-28T05:08:30.847933744Z changed 1 package, and audited 1327 packages in 5s
+2025-07-28T05:08:30.847947945Z 
+2025-07-28T05:08:30.847958955Z 269 packages are looking for funding
+2025-07-28T05:08:30.847965715Z   run `npm fund` for details
+2025-07-28T05:08:30.864615492Z 
+2025-07-28T05:08:30.864632472Z 9 vulnerabilities (3 moderate, 6 high)
+2025-07-28T05:08:30.864637682Z 
+2025-07-28T05:08:30.864643082Z To address all issues (including breaking changes), run:
+2025-07-28T05:08:30.864648892Z   npm audit fix --force
+2025-07-28T05:08:30.864653843Z 
+2025-07-28T05:08:30.864659203Z Run `npm audit` for details.
+2025-07-28T05:08:30.921651917Z ==> Running build command 'npm install && npm run build'...
+2025-07-28T05:08:34.295790049Z 
+2025-07-28T05:08:34.29583042Z up to date, audited 1327 packages in 3s
+2025-07-28T05:08:34.295837Z 
+2025-07-28T05:08:34.295852931Z 269 packages are looking for funding
+2025-07-28T05:08:34.295860141Z   run `npm fund` for details
+2025-07-28T05:08:34.31108125Z 
+2025-07-28T05:08:34.311156262Z 9 vulnerabilities (3 moderate, 6 high)
+2025-07-28T05:08:34.311162552Z 
+2025-07-28T05:08:34.311168822Z To address all issues (including breaking changes), run:
+2025-07-28T05:08:34.311175372Z   npm audit fix --force
+2025-07-28T05:08:34.311181732Z 
+2025-07-28T05:08:34.311188023Z Run `npm audit` for details.
+2025-07-28T05:08:34.565846927Z 
+2025-07-28T05:08:34.565882278Z > ai-frontend@0.1.0 build
+2025-07-28T05:08:34.565890628Z > react-scripts build
+2025-07-28T05:08:34.565896838Z 
+2025-07-28T05:08:36.028983634Z Could not find a required file.
+2025-07-28T05:08:36.029515778Z   Name: index.html
+2025-07-28T05:08:36.029530218Z   Searched in: /opt/render/project/src/public
+2025-07-28T05:08:36.071685693Z ==> Build failed 😞
+2025-07-28T05:08:36.071723384Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
