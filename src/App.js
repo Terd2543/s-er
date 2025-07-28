@@ -1,6 +1,4 @@
-="chat-messages">
-                        {chatHistory.length === 0 && !loading && !error && (
- import React, { useState } from 'react'; // ไม่ใช้ useEffect แล้วจึงเอาออก
+import React, { useState } from 'react'; // ไม่ใช้ useEffect แล้วจึงเอาออก
 import axios from 'axios';
 import './App.css';
 import ReactMarkdown from 'react-markdown'; // <--- เพิ่ม: นำเข้า ReactMarkdown
