@@ -13,7 +13,7 @@ function App() {
     // ตัวอย่าง: const BACKEND_URL = 'https://your-backend-service-name.onrender.com/api/chat';
     // หากรันบน Local ให้ใช้: http://localhost:3001/api/chat
     const BACKEND_URL = process.env.NODE_ENV === 'production'
-        ? 'https://ai-8mi3.onrender.com' // <-- *** เปลี่ยน URL นี้ให้เป็น URL จริงของ Backend บน Render ของคุณ ***
+        ? 'https://s-er.onrender.com' // <-- *** เปลี่ยน URL นี้ให้เป็น URL จริงของ Backend บน Render ของคุณ ***
         : 'http://localhost:3001/api/chat';
 
     const handleSendMessage = async () => {
