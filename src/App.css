@@ -179,6 +179,36 @@ body {
   opacity: 0.7;
 }
 
+/* *** เพิ่ม: Styling for Markdown Code Blocks *** */
+code {
+  background-color: #4a4f57; /* Darker background for inline code */
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+  color: #e0e0e0;
+}
+
+pre {
+  background-color: #33373e; /* Even darker background for code blocks */
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto; /* Enable horizontal scroll for long lines */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+pre code {
+  background-color: transparent; /* Override inline code background */
+  padding: 0;
+  color: #f0f0f0; /* Lighter text color for code */
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace; /* Monospaced font */
+  font-size: 0.85em;
+  line-height: 1.4;
+  display: block; /* Make sure it takes full width within pre */
+}
+
+
 /* Media queries for smaller screens */
 @media (max-width: 768px) {
   .chat-window {
