@@ -1,6 +1,18 @@
+/* src/App.css */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1a1a1a; /* พื้นหลังสีเข้ม */
+}
+
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #1a1a1a;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,62 +22,197 @@
   color: white;
 }
 
-.chat-container {
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #61dafb;
+.chat-window {
+  background-color: #282c34; /* พื้นหลังของกล่องแชท */
   border-radius: 10px;
-  background-color: #333;
-  width: 80%;
-  max-width: 600px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  width: 90%;
+  max-width: 700px;
+  height: 85vh; /* ทำให้หน้าต่างแชทสูง */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* ซ่อนส่วนเกิน */
 }
 
-textarea {
-  width: calc(100% - 20px); /* ลบ padding ออกจากความกว้าง */
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  background-color: #f0f0f0;
-  color: #333;
-  box-sizing: border-box; /* สำคัญเพื่อให้ padding ไม่เกินความกว้าง */
+.chat-header {
+  background-color: #3a3f47; /* สี Header */
+  padding: 15px;
+  border-bottom: 1px solid #4a4f57;
+  color: #61dafb; /* สีชื่อ AI ใน Header */
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
-button {
-  background-color: #61dafb;
+.chat-header h1 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.chat-messages {
+  flex-grow: 1; /* ให้ส่วนนี้ขยายเต็มพื้นที่ที่เหลือ */
+  padding: 15px;
+  overflow-y: auto; /* เปิดใช้งาน scrollbar เมื่อข้อความเยอะ */
+  display: flex;
+  flex-direction: column; /* จัดเรียงข้อความจากบนลงล่าง */
+  gap: 10px; /* ระยะห่างระหว่างข้อความ */
+}
+
+/* Scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+.message-bubble {
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 80%;
+  word-wrap: break-word; /* ข้อความยาวๆ จะขึ้นบรรทัดใหม่ */
+  line-height: 1.5;
+  font-size: 0.9em; /* ปรับขนาดฟอนต์ข้อความ */
+}
+
+.message-bubble.user {
+  background-color: #007bff; /* สีข้อความผู้ใช้ (น้ำเงิน) */
+  align-self: flex-end; /* ชิดขวา */
+  color: white;
+  border-bottom-right-radius: 4px; /* มุมแหลมเล็กน้อย */
+}
+
+.message-bubble.ai {
+  background-color: #4a4f57; /* สีข้อความ AI (เทาเข้ม) */
+  align-self: flex-start; /* ชิดซ้าย */
+  color: white;
+  border-bottom-left-radius: 4px; /* มุมแหลมเล็กน้อย */
+}
+
+.message-bubble.system {
+    background-color: #dc3545; /* สีแดงสำหรับ Error */
+    color: white;
+    align-self: flex-start;
+}
+
+.sender-name {
+    font-weight: bold;
+    margin-right: 5px;
+    color: #61dafb; /* สีชื่อผู้ส่ง */
+}
+
+.message-bubble.user .sender-name {
+    color: #b3d9ff; /* สีชื่อผู้ใช้ใน bubble ของผู้ใช้ */
+}
+
+.message-bubble.ai.loading {
+    font-style: italic;
+    color: #bbb;
+    background-color: #3c4149;
+}
+
+.welcome-message {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.9em;
+    padding: 20px;
+    margin-top: auto; /* ดันข้อความต้อนรับไปด้านบนหากไม่มีข้อความอื่น */
+}
+
+.chat-input-area {
+  display: flex;
+  padding: 15px;
+  background-color: #3a3f47; /* สีพื้นหลังของช่องพิมพ์ */
+  border-top: 1px solid #4a4f57;
+}
+
+.message-input {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border-radius: 20px; /* ทำให้ขอบมน */
+  border: 1px solid #5a5f67;
+  background-color: #33373e; /* สีพื้นหลังช่องพิมพ์ */
+  color: white;
+  font-size: 1em;
+  resize: none; /* ป้องกันการปรับขนาดด้วยมือ */
+  overflow-y: hidden; /* ซ่อน scrollbar ใน textarea */
+  max-height: 100px; /* จำกัดความสูง */
+  box-sizing: border-box; /* สำคัญ */
+}
+
+.message-input:focus {
+  outline: none;
+  border-color: #61dafb; /* สีขอบเมื่อ focus */
+  box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.3);
+}
+
+.chat-input-area button {
+  background-color: #61dafb; /* สีปุ่ม "ส่ง" */
   color: #282c34;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px; /* ทำให้ขอบมน */
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1em;
+  margin-left: 10px;
   transition: background-color 0.3s ease;
-  margin-top: 10px;
+  min-width: 80px; /* กำหนดความกว้างขั้นต่ำของปุ่ม */
 }
 
-button:hover:not(:disabled) {
+.chat-input-area button:hover:not(:disabled) {
   background-color: #21a1f1;
 }
 
-button:disabled {
-  background-color: #cccccc;
+.chat-input-area button:disabled {
+  background-color: #555;
   cursor: not-allowed;
   opacity: 0.7;
 }
 
-.ai-reply {
-  margin-top: 20px;
-  text-align: left;
-  background-color: #444;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+  .chat-window {
+    width: 95%;
+    height: 90vh;
+  }
 }
 
-.error-message {
-    color: #ff6b6b; /* สีแดงสดใสสำหรับ error */
-    margin-top: 10px;
-    font-weight: bold;
+@media (max-width: 480px) {
+  .chat-window {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+  .chat-header {
+    font-size: 1em;
+    padding: 10px;
+  }
+  .chat-messages {
+    padding: 10px;
+  }
+  .message-bubble {
+    padding: 8px 12px;
+    font-size: 0.85em;
+  }
+  .chat-input-area {
+    padding: 10px;
+  }
+  .message-input {
+    padding: 8px 12px;
+  }
+  .chat-input-area button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    min-width: 60px;
+  }
 }
