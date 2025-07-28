@@ -148,7 +148,7 @@
       appendMsg("user", message);
       input.value = "";
 
-      const res = await fetch("https://ai-8mi3.onrender.com", {
+      const res = await fetch("https://ai-8mi3.onrender.com"/chat, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message })
